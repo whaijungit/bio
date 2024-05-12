@@ -1,0 +1,63 @@
+.app-dialog {
+    width: 480px;
+    padding: 0px 80px;
+    border-radius: 16px;
+    padding-bottom: 40px;
+    border-color: transparent;
+    background-color: var(--light);
+
+    .dialog-header {
+        gap: 40px;
+        display: flex;
+        font-size: 20px;
+        cursor: pointer;
+        margin-top: 40px;
+        align-items: center;
+        margin-bottom: 48px;
+        justify-content: center;
+
+        .tabs-item {
+            font-size: 20px;
+            cursor: pointer;
+            position: relative;
+            transition: .500ms linear;
+
+            &.active {
+                font-weight: 600;
+                color: var(--primary);
+
+                &::after {
+                    width: 20px;
+                }
+            }
+
+            &::after {
+                left: 50%;
+                width: 0px;
+                height: 2px;
+                content: '';
+                bottom: -8px;
+                display: block;
+                position: absolute;
+                transition: .500ms linear;
+                transform: translate(-50%);
+                background-color: var(--primary);
+            }
+        }
+    }
+
+    .dialog-close {
+        top: 42px;
+        right: 30px;
+        display: flex;
+        cursor: pointer;
+        position: absolute;
+        border-radius: 4px;
+        align-items: center;
+        transition: .2s linear;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+    }
+}

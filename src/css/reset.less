@@ -1,0 +1,57 @@
+html #nprogress {
+    .bar {
+        background-color: var(--primary);
+    }
+}
+
+.ant-menu {
+    .ant-menu-sub {
+        background-color: transparent !important;
+    }
+
+    .ant-menu-submenu {
+
+        &.ant-menu-submenu-selected {
+
+            .ant-menu-submenu-title {
+                font-weight: 600;
+            }
+
+            .ant-menu-item-icon {
+
+                circle,
+                rect,
+                ellipse,
+                path {
+                    stroke: var(--primary);
+                }
+            }
+        }
+    }
+
+    .ant-menu-item {
+        &.ant-menu-item-selected {
+            .ant-menu-title-content {
+                font-weight: 600;
+            }
+
+            .ant-menu-item-icon {
+
+                rect,
+                path,
+                circle,
+                ellipse {
+                    stroke: var(--primary);
+                }
+            }
+        }
+
+    }
+}
+
+.ant {
+    &-btn {
+        display: flex;
+        font-weight: 600;
+    }
+}

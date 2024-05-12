@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .resizable {
+            width: 200px;
+            height: 200px;
+            background-color: #f0f0f0;
+            border: 1px solid #000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resizable .handle {
+            width: 20px;
+            height: 20px;
+            background-color: #000;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            cursor: se-resize;
+        }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="resizable" class="resizable"></div>
+
+    <script>
+        const ins = $('#resizable')
+        console.log(ins)
+    </script>
+    </script>
+</body>
+
+</html>
