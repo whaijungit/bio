@@ -11,6 +11,13 @@ const Users = lazy(async () => {
     return com;
 })
 
+const Dashbord = lazy(async () => {
+    start()
+    const com = await import('@/views/system/dashbord')
+    done()
+    return com;
+})
+
 const Roles = lazy(async () => {
     start()
     const com = await import('@/views/system/roles')
@@ -74,6 +81,14 @@ export const system_routes: RouteObject[] = [
         element: <Layout />,
         path: '/' + Link.system,
         children: [
+            {
+                index: true,
+                element: (
+                    <Suspense>
+                        <Dashbord/>
+                    </Suspense>
+                )
+            },
             {
                 path: path_link.system_users,
                 element: (

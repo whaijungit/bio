@@ -1,7 +1,7 @@
+import { Type } from './datas'
 import type { TextAreaProps } from 'antd/es/input'
 import { CheckboxGroupProps } from 'antd/es/checkbox'
 import type { CascaderProps, CollapseProps, ColorPickerProps, FormItemProps, InputNumberProps, InputProps, RadioGroupProps, SelectProps, SliderSingleProps, SwitchProps } from 'antd'
-import { Type } from './datas'
 
 export interface ISchema<ComponentProps = AntComponentProps> {
     /** 组件唯一标识 */
@@ -23,13 +23,13 @@ export type CustomComponentFunction<T> = (scheam: ISchema<T>) => React.ReactNode
 export interface ComponentImp {
     chooseData: CustomComponentFunction<any>
     input: CustomComponentFunction<InputProps>
-    radio: CustomComponentFunction<RadioGroupProps>
     select: CustomComponentFunction<SelectProps>
     switch: CustomComponentFunction<SwitchProps>
     selects: CustomComponentFunction<SelectProps>
-    checkbox: CustomComponentFunction<CheckboxGroupProps>
+    radio: CustomComponentFunction<RadioGroupProps>
     textArea: CustomComponentFunction<TextAreaProps>
     collapse: CustomComponentFunction<CollapseProps>
+    checkbox: CustomComponentFunction<CheckboxGroupProps>
     inputNumebr: CustomComponentFunction<InputNumberProps>
     inputNumberSlider: CustomComponentFunction<InputNumberProps & SliderSingleProps>
 }
