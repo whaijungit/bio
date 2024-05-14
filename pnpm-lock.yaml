@@ -5,6 +5,7 @@ specifiers:
   '@dnd-kit/modifiers': ^7.0.0
   '@dnd-kit/sortable': ^8.0.0
   '@dnd-kit/utilities': ^3.2.2
+  '@monaco-editor/react': ^4.6.0
   '@reduxjs/toolkit': ^2.2.4
   '@types/node': ^20.12.11
   '@types/nprogress': ^0.2.3
@@ -21,6 +22,7 @@ specifiers:
   eslint-plugin-react-hooks: ^4.6.0
   eslint-plugin-react-refresh: ^0.4.6
   less: ^4.2.0
+  monaco-editor: ^0.48.0
   nprogress: ^0.2.0
   react: ^18.2.0
   react-dom: ^18.2.0
@@ -34,11 +36,13 @@ dependencies:
   '@dnd-kit/modifiers': 7.0.0_lapgn5tcydgksdf34zqcxexmfu
   '@dnd-kit/sortable': 8.0.0_lapgn5tcydgksdf34zqcxexmfu
   '@dnd-kit/utilities': 3.2.2_react@18.3.1
+  '@monaco-editor/react': 4.6.0_p4qxy7hi5tguivn65crh6eeuhu
   '@reduxjs/toolkit': 2.2.4_irch7jnnqrn7hjrrnjtulxh6lm
   antd: 5.17.0_nnrd3gsncyragczmpvfhocinkq
   axios: 1.6.8
   dayjs: 1.11.11
   echarts: 5.5.0
+  monaco-editor: 0.48.0
   nprogress: 0.2.0
   react: 18.3.1
   react-dom: 18.3.1_react@18.3.1
@@ -711,6 +715,28 @@ packages:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
+
+  /@monaco-editor/loader/1.4.0_monaco-editor@0.48.0:
+    resolution: {integrity: sha512-00ioBig0x642hytVspPl7DbQyaSWRaolYie/UFNjoTdvoKPzo6xrXLhTk9ixgIKcLH5b5vDOjVNiGyY+uDCUlg==}
+    peerDependencies:
+      monaco-editor: '>= 0.21.0 < 1'
+    dependencies:
+      monaco-editor: 0.48.0
+      state-local: 1.0.7
+    dev: false
+
+  /@monaco-editor/react/4.6.0_p4qxy7hi5tguivn65crh6eeuhu:
+    resolution: {integrity: sha512-RFkU9/i7cN2bsq/iTkurMWOEErmYcY6JiQI3Jn+WeR/FGISH8JbHERjpS9oRuSOPvDMJI0Z8nJeKkbOs9sBYQw==}
+    peerDependencies:
+      monaco-editor: '>= 0.25.0 < 1'
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@monaco-editor/loader': 1.4.0_monaco-editor@0.48.0
+      monaco-editor: 0.48.0
+      react: 18.3.1
+      react-dom: 18.3.1_react@18.3.1
+    dev: false
 
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -2092,6 +2118,10 @@ packages:
       brace-expansion: 2.0.1
     dev: true
 
+  /monaco-editor/0.48.0:
+    resolution: {integrity: sha512-goSDElNqFfw7iDHMg8WDATkfcyeLTNpBHQpO8incK6p5qZt5G/1j41X0xdGzpIkGojGXM+QiRQyLjnfDVvrpwA==}
+    dev: false
+
   /ms/2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
     dev: true
@@ -2963,6 +2993,10 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /state-local/1.0.7:
+    resolution: {integrity: sha512-HTEHMNieakEnoe33shBYcZ7NX83ACUjCu8c40iOGEZsngj9zRnkqS9j1pqQPXwobB0ZcVTk27REb7COQ0UR59w==}
+    dev: false
 
   /string-convert/0.2.1:
     resolution: {integrity: sha512-u/1tdPl4yQnPBjnVrmdLo9gtuLvELKsAoRapekWggdiQNvvvum+jYF329d84NAa660KQw7pB2n36KrIKVoXa3A==}

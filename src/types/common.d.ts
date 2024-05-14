@@ -8,3 +8,12 @@ declare interface RouteState {
     title: string
     hasAside: boolean
 }
+
+declare interface ValidateErrorEntity<Values = any> {
+    values: Values;
+    errorFields: {
+        name: any;
+        errors: string[];
+    }[];
+    outOfDate: boolean;
+}

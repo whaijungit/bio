@@ -1,5 +1,6 @@
+import { message } from 'antd'
 import { LoginPhone } from './LoginPhone'
-import { LoignPassword } from './password'
+import { LoignPassword } from './LoginPassword'
 import { useEffect, useRef, useState } from 'react'
 
 const tabKeys = ['password', 'phone'] as const
@@ -17,6 +18,7 @@ const handleEsce = (e: KeyboardEvent) => {
 }
 
 export const Login: React.FC<LoginProps> = ({ open, onClose }) => {
+    const [loading, setLoading] = useState(false)
     const dialogRef = useRef<HTMLDialogElement>(null!)
     const [tabKey, setTabKey] = useState<string>(tabKeys[0])
     useEffect(() => {
@@ -48,6 +50,24 @@ export const Login: React.FC<LoginProps> = ({ open, onClose }) => {
             }
         }
     }
+
+    const handleLoginPwd = async () => {
+        setLoading(true)
+        await new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(true)
+                setLoading(false)
+            }, 1000);
+        })
+        message.success('登录成功')
+        return true
+    }
+
+    const handleLoginPhone = async (values: any) => {
+        console.log(values)
+        return true
+    }
+
     return (
         <dialog ref={dialogRef} className='app-dialog'>
             <div className='dialog-header'>
@@ -60,8 +80,18 @@ export const Login: React.FC<LoginProps> = ({ open, onClose }) => {
                     <path d="M5 5L19 19" stroke="#181D28" />
                 </svg>
             </div>
-            {tabKey === tabKeys[0] && <LoignPassword />}
-            {tabKey === tabKeys[1] && <LoginPhone />}
+            {tabKey === tabKeys[0] && (
+                <LoignPassword
+                    loading={loading}
+                    onLogin={handleLoginPwd}
+                />
+            )}
+            {tabKey === tabKeys[1] && (
+                <LoginPhone
+                    loading={loading}
+                    onLogin={handleLoginPhone}
+                />
+            )}
         </dialog>
     )
 }

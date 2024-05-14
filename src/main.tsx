@@ -1,4 +1,5 @@
 import './css'
+import './webwoker'
 import App from './App'
 import ReactDOM from 'react-dom/client'
 

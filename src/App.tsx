@@ -6,7 +6,9 @@ import { BrowserRouter } from 'react-router-dom'
 const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <ConfigProvider {...configProviderProps}>
+      <ConfigProvider
+        {...configProviderProps}
+      >
         <RouterView />
       </ConfigProvider>
     </BrowserRouter>
