@@ -1,5 +1,5 @@
 import Layout from '@/views/layout'
-import { path_link } from '@/common'
+import { path_link } from '@/config'
 import { Suspense, lazy } from 'react'
 import { done, start } from 'nprogress'
 import { RouteObject } from 'react-router-dom'

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { message_menu, system_menu, task_menu } from '@/common'
+import { message_menu, system_menu, task_menu } from '@/config'
 
 export const useRouteState = () => {
     const location = useLocation()

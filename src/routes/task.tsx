@@ -1,7 +1,7 @@
 import Layout from '@/views/layout'
 import { Suspense, lazy } from 'react'
 import { done, start } from 'nprogress'
-import { Link, path_link } from '@/common'
+import { Link, path_link } from '@/config'
 import { RouteObject } from 'react-router-dom'
 
 const TaskAnalysisTools = lazy(async () => {

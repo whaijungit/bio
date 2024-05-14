@@ -1,4 +1,4 @@
-import { Link } from '@/common'
+import { Link } from '@/config'
 import Layout from '@/views/layout'
 import { Suspense, lazy } from 'react'
 import { start, done } from 'nprogress'

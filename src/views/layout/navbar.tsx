@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Login } from '@/components/auth'
-import { Link, path_link } from '@/common'
+import { Link, path_link } from '@/config'
 import { NavLink } from 'react-router-dom'
 import brand from '@/assets/icon/brand.svg'
 
