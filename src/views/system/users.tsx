@@ -1,11 +1,9 @@
-import { ProTable } from '@/components/table';
-
-
+import { TableSection } from '@/components/table';
 
 const Users: React.FC = () => {
     return (
         <>
-            <ProTable />
+            <TableSection />
         </>
     )
 }
