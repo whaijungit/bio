@@ -4,6 +4,28 @@ html #nprogress {
     }
 }
 
+.more-action {
+    width: 28px;
+    height: 24px;
+    display: flex;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 4px;
+    text-align: center;
+    align-items: center;
+    color: var(--primary);
+    justify-content: center;
+
+    &:hover {
+        background-color: var(--gray-3);
+    }
+
+    span {
+        transform: translateY(-3px);
+    }
+
+}
+
 .ant-menu {
     .ant-menu-sub {
         background-color: transparent !important;
@@ -50,6 +72,11 @@ html #nprogress {
 }
 
 .ant {
+    &-table-cell {
+        white-space: nowrap;
+        padding: 10px 24px !important;
+    }
+
     &-btn {
         display: flex;
         font-weight: 600;
