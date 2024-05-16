@@ -103,6 +103,13 @@ export const search_icon = (
     </svg>
 )
 
+export const captcha = (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M5.62371 7.73828C6.83114 7.2173 9.52063 5.98539 11.2459 4.65412C11.6832 4.31673 12.3168 4.31673 12.7541 4.65412C14.4794 5.98539 17.1688 7.2173 18.3763 7.73828C18.7517 7.90028 19.0008 8.2687 18.9966 8.67758C18.9303 15.0526 17.852 17.9528 12.3781 20.3389C12.1382 20.4435 11.861 20.4455 11.6197 20.3441C6.1476 18.0447 5.06961 15.0578 5.00338 8.67756C4.99914 8.26868 5.24826 7.90028 5.62371 7.73828Z" fill="#B8BDCB" />
+        <path d="M10.0208 12.212L11.6383 14.9749L14.3403 10.3167" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+)
+
 export const download_icon = (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
         <path d="M12 4L12 14" stroke="#0C6DFF" strokeWidth="2" strokeLinejoin="round" />

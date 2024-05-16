@@ -1,97 +1,102 @@
-import { message } from 'antd'
-import { LoginPhone } from './LoginPhone'
-import { LoignPassword } from './LoginPassword'
-import { useEffect, useRef, useState } from 'react'
 
-const tabKeys = ['password', 'phone'] as const
+import { afer, awit } from '@/utils'
+import { useState } from 'react'
+import { buttonStyle } from './styles'
+import { LoginPhone } from './LoginPhone'
+import { Form, Modal, Tabs, message, Button } from 'antd'
+import { LoignPassword } from './LoginPassword'
 
 interface LoginProps {
     open?: boolean
     onClose?: () => void
 }
 
-const handleEsce = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-        e.preventDefault()
-        e.stopPropagation()
-    }
-}
 
 export const Login: React.FC<LoginProps> = ({ open, onClose }) => {
+    const [form] = Form.useForm()
     const [loading, setLoading] = useState(false)
-    const dialogRef = useRef<HTMLDialogElement>(null!)
-    const [tabKey, setTabKey] = useState<string>(tabKeys[0])
-    useEffect(() => {
-        if (open) {
-            showDialogModal()
-        } else if (open === false) {
-            hideDialogModal()
-        }
-        window.addEventListener('keydown', handleEsce)
-        return () => {
-            window.removeEventListener('keydown', handleEsce)
-        }
-    }, [open])
-
-    const showDialogModal = () => {
-        if (dialogRef.current) {
-            dialogRef.current.showModal()
-        }
-    }
-
-    const handleCloseModal = () => {
-        onClose && onClose()
-    }
-
-    const hideDialogModal = () => {
-        if (open === false) {
-            if (dialogRef.current) {
-                dialogRef.current.close()
-            }
-        }
-    }
-
-    const handleLoginPwd = async () => {
+    const [tabKey, setTabKey] = useState<string>('pwd')
+    const handleLoginPwd = async (values: any) => {
         setLoading(true)
-        await new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(true)
-                setLoading(false)
-            }, 1000);
-        })
-        message.success('登录成功')
-        return true
+        await awit()
+        message.success('登录成功', 1)
+        console.log(values)
+        onClose && onClose()
+        setLoading(false)
     }
 
-    const handleLoginPhone = async (values: any) => {
-        console.log(values)
-        return true
+    const handleLoginPhone = async (vs: any) => {
+        setLoading(true)
+        await awit()
+        message.success('登录成功', 1)
+        console.log(vs)
+        onClose && onClose()
+        setLoading(false)
+    }
+
+    const handleFinish = async (values: any) => {
+        if (tabKey === 'pwd') {
+            handleLoginPwd(values)
+
+        } else {
+            handleLoginPhone(values)
+        }
     }
 
     return (
-        <dialog ref={dialogRef} className='app-dialog'>
-            <div className='dialog-header'>
-                <div onClick={() => setTabKey('password')} className={`${tabKey === 'password' ? 'active tabs-item' : ''}`} >密码登录</div>
-                <div onClick={() => setTabKey('phone')} className={`${tabKey === 'phone' ? 'active tabs-item' : ''}`}>短信登录</div>
-            </div>
-            <div className='dialog-close' onClick={handleCloseModal}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M5 19L19 5" stroke="#181D28" />
-                    <path d="M5 5L19 19" stroke="#181D28" />
-                </svg>
-            </div>
-            {tabKey === tabKeys[0] && (
-                <LoignPassword
-                    loading={loading}
-                    onLogin={handleLoginPwd}
+        <Modal
+            open={open}
+            title={null}
+            footer={null}
+            destroyOnClose
+            onCancel={onClose}
+            maskClosable={false}
+            styles={{
+                content: {
+                    paddingTop: 40,
+                    paddingLeft: 80,
+                    paddingRight: 80,
+                    borderRadius: 16,
+                }
+            }}
+        >
+            <Form
+                form={form}
+                onFinishFailed={afer}
+                onFinish={handleFinish}
+            >
+                <Tabs
+                    activeKey={tabKey}
+                    onChange={(e) => {
+                        setTabKey(e)
+                        form.resetFields()
+                    }}
+                    items={[
+                        {
+                            key: 'pwd',
+                            label: '密码登录',
+                            children: (
+                                <LoignPassword />
+                            )
+                        },
+                        {
+                            key: 'phone',
+                            label: '短信登录',
+                            children: (
+                                <LoginPhone />
+                            )
+                        },
+                    ]}
                 />
-            )}
-            {tabKey === tabKeys[1] && (
-                <LoginPhone
-                    loading={loading}
-                    onLogin={handleLoginPhone}
-                />
-            )}
-        </dialog>
+                <Form.Item>
+                    <Button loading={loading} style={buttonStyle} htmlType='submit' type='primary' block>登录</Button>
+                </Form.Item>
+                <Form.Item>
+                    <Button htmlType='reset' style={buttonStyle} block>注册</Button>
+                </Form.Item>
+            </Form>
+
+
+        </Modal>
     )
 }

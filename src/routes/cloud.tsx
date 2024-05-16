@@ -39,52 +39,59 @@ export const GroupDetail = lazy(async () => {
     return com
 })
 
-export const cloud_routes: RouteObject[] = [
-    {
-        path: '/',
-        element: <Layout />,
-        children: [
-            {
-                index: true,
-                element: (
-                    <Suspense>
-                        <Home />
-                    </Suspense>
-                )
-            },
-            {
-                path: Link.tools,
-                element: (
-                    <Suspense>
-                        <Tools />
-                    </Suspense>
-                )
-            },
-            {
-                path: Link.tools + '/:id',
-                element: (
-                    <Suspense>
-                        <ToolDetail />
-                    </Suspense>
-                )
-            },
-            {
-                path: Link.groups,
-                element: (
-                    <Suspense>
-                        <Groups />
-                    </Suspense>
-                )
-            },
-            {
-                path: Link.groups + '/:id',
-                element: (
-                    <Suspense>
-                        <GroupDetail />
-                    </Suspense>
-                )
-            }
-        ]
+export const cloud_routes: (RouteObject & {
+    meta?: {
+        auth: boolean
     }
+})[] = [
+        {
+            path: '/',
+            meta: {
+                auth: false,
+            },
+            element: <Layout />,
+            children: [
+                {
+                    index: true,
+                    element: (
+                        <Suspense>
+                            <Home />
+                        </Suspense>
+                    )
+                },
+                {
+                    path: Link.tools,
+                    element: (
+                        <Suspense>
+                            <Tools />
+                        </Suspense>
+                    )
+                },
+                {
+                    path: Link.tools + '/:id',
+                    element: (
+                        <Suspense>
+                            <ToolDetail />
+                        </Suspense>
+                    )
+                },
+                {
+                    path: Link.groups,
+                    element: (
+                        <Suspense>
+                            <Groups />
+                        </Suspense>
+                    )
+                },
+                {
+                    path: Link.groups + '/:id',
+                    element: (
+                        <Suspense>
+                            <GroupDetail />
+                        </Suspense>
+                    )
+                }
+            ]
+        }
 
-]
+    ]

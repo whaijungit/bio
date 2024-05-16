@@ -1,19 +1,15 @@
-import { afer } from '@/utils'
-import { buttonStyle } from './styles'
-import { LoginProps } from './interface'
-import { Button, Checkbox, Flex, Form, FormProps, Input, message } from 'antd'
+import { useEffect } from 'react'
+import { Checkbox, Flex, Form, Input } from 'antd'
 
-export const LoignPassword: React.FC<LoginProps> = ({ loading, onLogin }) => {
+export const LoignPassword: React.FC = () => {
     const [form] = Form.useForm()
+    useEffect(() => {
+        form.resetFields()
+    }, [form])
 
 
-    const handleSubmit: FormProps['onFinish'] = onLogin
-
-    const handleFinishFailed: FormProps['onFinishFailed'] = (errorInfo) => {
-        message.error(afer(errorInfo))
-    }
     return (
-        <Form form={form} onFinish={handleSubmit} onFinishFailed={handleFinishFailed}>
+        <>
             <Form.Item name='username' rules={[{ required: true, message: '请输入邮箱/手机号' }]}>
                 <Input allowClear placeholder='请输入邮箱/手机号' />
             </Form.Item>
@@ -39,13 +35,13 @@ export const LoignPassword: React.FC<LoginProps> = ({ loading, onLogin }) => {
             <Form.Item initialValue={true} valuePropName='checked' name='remdmer'>
                 <Checkbox >记住密码</Checkbox>
             </Form.Item>
-            <Form.Item>
+            {/* <Form.Item>
                 <Button loading={loading} style={buttonStyle} htmlType='submit' type='primary' block>登录</Button>
             </Form.Item>
             <Form.Item>
                 <Button htmlType='reset' style={buttonStyle} block>注册</Button>
-            </Form.Item>
-        </Form>
+            </Form.Item> */}
+        </>
     )
 }
 
