@@ -20,9 +20,11 @@
         "@reduxjs/toolkit": "^2.2.4",
         "antd": "5.17.0",
         "axios": "^1.6.8",
+        "d3-geo": "^3.1.1",
         "dayjs": "^1.11.11",
         "echarts": "^5.5.0",
         "leva": "^0.9.35",
+        "mockjs": "^1.1.0",
         "monaco-editor": "^0.48.0",
         "nprogress": "^0.2.0",
         "react": "^18.2.0",
@@ -32,6 +34,8 @@
         "three": "^0.164.1"
     },
     "devDependencies": {
+        "@types/d3-geo": "^3.1.0",
+        "@types/mockjs": "^1.0.10",
         "@types/node": "^20.12.11",
         "@types/nprogress": "^0.2.3",
         "@types/react": "^18.2.66",

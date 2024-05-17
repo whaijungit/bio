@@ -1,40 +1,31 @@
-import { awit } from '@/utils';
+import { awit } from '@/utils'
+import { Actions } from '@/config'
+import { getSystemRoleList } from '@/api/role'
 import { plus, search_icon } from '@/components/icons'
 import { usePagantion } from '@/compisition/usePagantion'
+import DrawerUserForm from '@/components/users/drawer_user_form'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { Button, Dropdown, Flex, Input, Select, Space, Switch, Table, TableProps, message } from 'antd';
-
-const userDatas: any[] = []
-const roleDatas: any[] = []
-for (let i = 0; i < 1000; i++) {
-    userDatas.push({
-        id: i + 1,
-        role: 1,
-        is_active: Math.random() > 0.5 ? false : true,
-        name: `item-${i + 1}`
-    })
-    if (i <= 20) {
-        roleDatas.push({
-            id: i + 1,
-            role_name: '管理员-' + (i + 1)
-        })
-    }
-}
+import { Button, Dropdown, Flex, Input, Popconfirm, Select, Space, Switch, Table, TableProps, message } from 'antd'
+import { addSystemUser, adminResetSystemUser, adminSystemUserAssignRole, changeSystemUserActive, findBySystemUserId, getSystemUserList, removeSystemUser, updataSystemUser } from '@/api/user'
 
 const Users: React.FC = () => {
     const [total, setTotal] = useState(10)
     const [loading, setLoading] = useState(false)
-    const [datas, setDatas] = useState<any[]>([])
+    const [datas, setDatas] = useState<User[]>([])
     const [search, setSearch] = useState<string>()
-    const [role_list, setRole_list] = useState<any[]>([])
-    const columns = useMemo<TableProps<any>['columns']>(() => [
+    const [role_list, setRole_list] = useState<Role[]>([])
+    const [selectedUser, setSelectedUser] = useState<User>()
+    const [submitLoading, setSubmitLoading] = useState(false)
+    const [action, setAction] = useState<Actions>(Actions.add)
+    const [openDrawerForm, setOpenDrawerForm] = useState(false)
+    const columns = useMemo<TableProps<User>['columns']>(() => [
         {
             title: 'id',
             dataIndex: 'id',
         },
         {
-            title: 'name',
-            dataIndex: 'name',
+            title: '姓名',
+            dataIndex: 'realname',
         },
         {
             title: '手机号',
@@ -42,57 +33,66 @@ const Users: React.FC = () => {
         },
         {
             title: '邮箱',
+            ellipsis: true,
             dataIndex: 'email',
         },
         {
-            width: 550,
+            width: 450,
             title: '角色',
             dataIndex: 'role',
+            ellipsis: true,
             render(_, item) {
                 return (
                     <Select
                         virtual
                         allowClear
-                        maxTagCount={3}
                         mode='multiple'
-                        style={{ width: 450 }}
-                        defaultValue={item.role}
+                        maxTagCount={3}
+                        style={{ width: 390 }}
+                        defaultValue={item.roles_list}
                         onChange={e => {
                             console.log(e)
                             handleChangeRole(item, e)
                         }}
-                        options={role_list.map(it => ({ ...it, value: it.id, label: it.role_name }))}
+                        options={role_list.map(it => ({ ...it, value: it.id, label: it.name }))}
                     />
                 )
             }
         },
         {
             title: '角色',
-            render(record) {
-                return <Switch defaultChecked={record.is_active} />
+            render(_, item) {
+                return (
+                    <Switch
+                        checkedChildren='启用'
+                        unCheckedChildren='禁用'
+                        defaultChecked={item.is_active}
+                        onChange={e => handleChangeActive(item, e)}
+                    />
+                )
             }
         },
         {
             width: 300,
             title: '操作',
             fixed: 'right',
-            render() {
+            render(_, item) {
                 return (
                     <Space size='small'>
-                        <Button size='small' type='link'>详情</Button>
-                        <Button size='small' type='link'>编辑</Button>
-                        <Button size='small' type='link'>修改密码</Button>
+                        <Button onClick={() => handleClickColumnItem(item, Actions.view)} size='small' type='link'>详情</Button>
+                        <Button onClick={() => handleClickColumnItem(item, Actions.update)} size='small' type='link'>编辑</Button>
+                        <Button onClick={() => handleClickColumnItem(item, Actions.changePwd)} size='small' type='link'>修改密码</Button>
                         <Dropdown
                             menu={{
                                 items: [
                                     {
-                                        label: '删除',
+                                        label: <Popconfirm icon={null} onConfirm={() => handleRemove(item)} okButtonProps={{ danger: true }} title='删除用户'>删除</Popconfirm>,
                                         key: 'remove',
                                         style: {
                                             width: 76,
                                             fontWeight: 600,
                                             color: 'var(--primary)'
-                                        }
+                                        },
                                     }
                                 ]
                             }}
@@ -107,45 +107,78 @@ const Users: React.FC = () => {
         }
     ], [role_list])
     const { page, pageSize, onChangePage, onChangePageSize } = usePagantion()
+
+
     const fetchData = useCallback(() => {
         (async () => {
             setLoading(true)
             try {
                 await awit()
-                console.log('params====>', {
-                    page,
-                    pageSize,
-                    search,
-                })
-                setDatas(userDatas)
-                setRole_list(roleDatas)
-                setTotal(userDatas.length)
-            } catch (error) {
-                console.log('error params====>', {
-                    page,
-                    pageSize,
-                    search,
-                })
-            } finally {
+                const r = await getSystemUserList()
+                setTotal(r.data.count)
+                setDatas(r.data.results)
+            } catch (error) { } finally {
                 setLoading(false)
             }
         })();
     }, [page, pageSize, search])
     useEffect(fetchData, [page, pageSize, search])
+    useEffect(() => {
+        fetchRoles()
+    }, [])
+    const fetchRoles = async () => {
+        getSystemRoleList().then(r => {
+            setRole_list(r.data.results)
+        })
+    }
+    const handleClickColumnItem = async (item: User, action: Actions) => {
+        try {
+            const r = await findBySystemUserId(item.id)
+            setSelectedUser(r.data)
+            setAction(action)
+            setOpenDrawerForm(true)
+        } catch (error) {
 
+        }
+    }
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         onChangePage(1)
         setSearch(e.target.value || undefined)
     }
 
+    const handleRemove = async (item: User,) => {
+        setLoading(true)
+        try {
+            await removeSystemUser(item.id)
+            fetchData()
+            message.success('删除成功')
+        } catch (error) {
+
+        }
+    }
+    const handleChangeActive = (item: User, value: boolean) => {
+        (async () => {
+            try {
+                setLoading(true)
+                await changeSystemUserActive(item.id, value)
+                fetchData()
+                message.success('修改状态成功', 1)
+            } catch (error) {
+
+            } finally {
+                setLoading(false)
+            }
+        })()
+    }
+
+    const handleOpenDrawerUserForm = () => {
+        setOpenDrawerForm(true)
+    }
+
     const handleChangeRole = async (item: any, roles: number[]) => {
         setLoading(true)
         try {
-            await awit()
-            console.log('role=======>', {
-                item,
-                roles,
-            })
+            await adminSystemUserAssignRole(item.id, roles)
             message.success('授权成功')
             fetchData()
         } catch (error) {
@@ -155,22 +188,68 @@ const Users: React.FC = () => {
         }
     }
 
+    const handleCloseDrawer = () => {
+        setAction(Actions.add)
+        setOpenDrawerForm(false)
+        setSelectedUser(undefined)
+    }
+
+    const handleConfirmDrawerForm = async (values: User) => {
+        try {
+            setSubmitLoading(true)
+            switch (action) {
+                case Actions.add:
+                    await addSystemUser(values);
+                    fetchData()
+                    handleCloseDrawer()
+                    message.success('新建用户成功')
+                    break
+                case Actions.update:
+                    await updataSystemUser(selectedUser!.id, values)
+                    fetchData()
+                    handleCloseDrawer()
+                    message.success('编辑用户成功')
+                    break
+                case Actions.changePwd:
+                    await adminResetSystemUser(selectedUser!.id, values)
+                    fetchData()
+                    handleCloseDrawer()
+                    message.success('修改密码成功')
+                    break
+            }
+        } catch (error) {
+
+        } finally {
+
+            setSubmitLoading(false)
+        }
+    }
+
     return (
         <div style={{ padding: 20 }}>
+            <DrawerUserForm
+                action={action}
+                open={openDrawerForm}
+                onClose={handleCloseDrawer}
+                initialValues={selectedUser}
+                submitLoading={submitLoading}
+                onConfirm={handleConfirmDrawerForm}
+            />
             <Flex style={{ marginBottom: 20 }} justify='space-between'>
                 <Space>
                     <Input allowClear placeholder='输入用户姓名或邮箱' prefix={search_icon} value={search} onChange={handleSearch} />
                 </Space>
                 <Space>
-                    <Button icon={plus} type='primary'>新建用户</Button>
+                    <Button onClick={handleOpenDrawerUserForm} icon={plus} type='primary'>新建用户</Button>
                 </Space>
             </Flex>
             <Table
+                rowKey={'id'}
                 columns={columns}
                 loading={loading}
-                scroll={{ x: 1200 }}
-                rowHoverable={false}
                 dataSource={datas}
+                rowHoverable={false}
+                scroll={{ x: 1200 }}
                 pagination={{
                     total,
                     pageSize,

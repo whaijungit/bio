@@ -1,7 +1,7 @@
-const Tools: React.FC = () => {
+const Tools:React.FC = () =>{
     return (
         <>
-
+        
         </>
     )
 }

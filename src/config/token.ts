@@ -48,6 +48,14 @@ export const path_link = {
     system_permission: `/${Link.system}/${Link.permissions}`,
 }
 
+export enum Actions {
+    add = 'add',
+    view = 'view',
+    remove = 'remove',
+    update = 'update',
+    changePwd = 'changePwd',
+}
+
 export const configProviderProps: ConfigProviderProps = {
     locale,
     componentSize: 'large',
