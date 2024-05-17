@@ -20,8 +20,10 @@ const Users: React.FC = () => {
     const [openDrawerForm, setOpenDrawerForm] = useState(false)
     const columns = useMemo<TableProps<User>['columns']>(() => [
         {
-            title: 'id',
-            dataIndex: 'id',
+            title: '序号',
+            render(_, __, index) {
+                return index + 1
+            }
         },
         {
             title: '姓名',
@@ -50,10 +52,7 @@ const Users: React.FC = () => {
                         maxTagCount={3}
                         style={{ width: 390 }}
                         defaultValue={item.roles_list}
-                        onChange={e => {
-                            console.log(e)
-                            handleChangeRole(item, e)
-                        }}
+                        onChange={e => handleChangeRole(item, e)}
                         options={role_list.map(it => ({ ...it, value: it.id, label: it.name }))}
                     />
                 )
@@ -86,7 +85,16 @@ const Users: React.FC = () => {
                             menu={{
                                 items: [
                                     {
-                                        label: <Popconfirm icon={null} onConfirm={() => handleRemove(item)} okButtonProps={{ danger: true }} title='删除用户'>删除</Popconfirm>,
+                                        label: (
+                                            <Popconfirm
+                                                icon={null}
+                                                title='删除用户'
+                                                okButtonProps={{ danger: true }}
+                                                onConfirm={() => handleRemove(item)}
+                                            >
+                                                删除
+                                            </Popconfirm>
+                                        ),
                                         key: 'remove',
                                         style: {
                                             width: 76,
