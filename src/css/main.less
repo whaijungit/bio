@@ -10,6 +10,28 @@
     --border-color: #E8EAF0;
 }
 
+.audit {
+    --failed: #ffbdbd;
+    --await: #DCDEE2;
+    --success: #6bed93;
+    max-width: 62px;
+    padding: 0px 10px;
+    border-radius: 8px;
+    width: fit-content;
+
+    &-success {
+        background-color: var(--success);
+    }
+
+    &-failed {
+        background-color: var(--failed);
+    }
+
+    &-await {
+        background-color: var(--await);
+    }
+}
+
 .app-design {
     margin: 0 auto;
     width: var(--design-size);

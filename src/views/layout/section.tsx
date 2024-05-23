@@ -1,9 +1,15 @@
-import { Menu } from 'antd';
-import { Outlet } from 'react-router-dom';
-import { useRouteState } from '@/compisition/userRouteState';
+import { Menu, MenuProps } from 'antd'
+import { Outlet } from 'react-router-dom'
+import { menuSlice, useMenu } from '@/store/menuSlice'
+import { useRouteState } from '@/compisition/userRouteState'
 
 const Section: React.FC = () => {
     const { routeState } = useRouteState()
+    const { menuState, dispatch } = useMenu()
+
+    const handleClickMenu: MenuProps['onClick'] = (info) => {
+        dispatch(menuSlice.actions.setMenuSelectedKeys(info.keyPath))
+    }
 
     if (routeState.hasAside) {
         return (
@@ -14,6 +20,8 @@ const Section: React.FC = () => {
                         <Menu
                             mode='inline'
                             items={routeState.menus}
+                            onClick={handleClickMenu}
+                            selectedKeys={menuState.menuSelectKeys}
                         />
                     </div>
                 </aside>
