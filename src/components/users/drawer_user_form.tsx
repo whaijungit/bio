@@ -3,19 +3,19 @@ import { Actions } from "@/config"
 import { useFormItems } from "./model"
 import { Button, Drawer, Form, FormItemProps, Space } from "antd"
 
-interface DrawerUserFormProps {
+export interface DrawerUserFormProps {
     open?: boolean
     action?: Actions
     initialValues?: User
     submitLoading?: boolean
 }
 
-interface DrawerUserFormEvent {
+export interface DrawerUserFormEvent {
     onClose?: () => void
     onConfirm?: (values: User) => void
 }
 
-const DrawerUserForm: React.FC<DrawerUserFormProps & DrawerUserFormEvent> = (props) => {
+export const DrawerUserForm: React.FC<DrawerUserFormProps & DrawerUserFormEvent> = (props) => {
     const [form] = Form.useForm<User>()
     useEffect(() => {
         if (props.initialValues) {
@@ -66,6 +66,7 @@ const DrawerUserForm: React.FC<DrawerUserFormProps & DrawerUserFormEvent> = (pro
                 width={460}
                 title={title()}
                 open={props.open}
+                maskClosable={false}
                 getContainer='#userForm'
                 onClose={props.onClose}
                 footer={

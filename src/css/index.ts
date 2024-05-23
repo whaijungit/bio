@@ -1,4 +1,5 @@
 import './main.less'
+import './role.less'
 import './reset.less'
 import './dialog.less'
 import 'nprogress/nprogress.css'

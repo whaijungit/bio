@@ -3,7 +3,7 @@ import { Actions } from '@/config'
 import { getSystemUserList } from '@/api/user'
 import { plus, search_icon } from '@/components/icons'
 import { usePagantion } from '@/compisition/usePagantion'
-import DrawerToolForm from '@/components/users/drawer_user_form'
+import { DrawerToolForm } from '@/components/tools'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Button, Dropdown, Flex, Input, Popconfirm, Select, Space, Switch, Table, TableProps, message } from 'antd'
 import { addSystemTool, updataSystemTool, removeSystemTool, getSystemToolList, findBySystemToolId } from '@/api/tools'
@@ -30,7 +30,6 @@ const Tools: React.FC = () => {
         },
         {
             title: '类型',
-            ellipsis: true,
         },
         {
             title: '创建者',
@@ -67,7 +66,7 @@ const Tools: React.FC = () => {
             title: '审核',
             render(_, item) {
                 return (
-                    <Dropdown menu={{style: {backgroundColor: 'var(--light)'},items: [{key: 'success',label: '成功'},{key: 'failed',label: '失败'}]}}>
+                    <Dropdown menu={{ style: { backgroundColor: 'var(--light)' }, items: [{ key: 'success', label: '成功' }, { key: 'failed', label: '失败' }] }}>
                         <span className='audit audit-success'>成功</span>
                     </Dropdown>
                     // <Switch

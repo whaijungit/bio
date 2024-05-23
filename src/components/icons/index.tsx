@@ -154,3 +154,19 @@ export const feedback_icon = (
         <path d="M11 13H13" stroke="#89909E" strokeWidth="2" strokeLinejoin="round" />
     </svg>
 )
+
+export const remove = (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M5 7H19L17.5 20H6.5L5 7Z" stroke="#67717D" strokeWidth="2" strokeLinejoin="round" />
+        <path d="M3 7H21" stroke="#67717D" strokeWidth="2" strokeLinejoin="round" />
+        <rect x="9" y="4" width="6" height="3" stroke="#67717D" strokeWidth="2" strokeLinejoin="round" />
+    </svg>
+)
+
+export const editor = (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M4.99999 15L15 5.00001L19 9.00001L9.00001 19L5.00001 19L4.99999 15Z" stroke="#67717D" strokeWidth="2" strokeLinejoin="round" />
+        <path d="M12.4142 8.75781L15.2426 11.5862" stroke="#67717D" strokeWidth="2" strokeLinejoin="round" />
+        <path d="M13 19H20" stroke="#67717D" strokeWidth="2" strokeLinejoin="round" />
+    </svg>
+)

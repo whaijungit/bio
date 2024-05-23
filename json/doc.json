@@ -1,0 +1,68 @@
+{
+    "tec_route": {
+        "name": "",
+        "path": ""
+    },
+    "basic_info": {
+        "type": "tools",
+        "name_zh": "三叉戟",
+        "version": "0.1.0",
+        "desc": "测试用工具",
+        "name_en": "trident",
+        "category": "basic_plotting"
+    },
+    "result_show": {
+        "data": [
+            {
+                "data": [
+                    {
+                        "anno": [
+                            "黄金三叉戟"
+                        ],
+                        "data": [
+                            {
+                                "name": "sanchaji",
+                                "path": "sanchaji.jpg"
+                            }
+                        ],
+                        "name": "sanchaji",
+                        "type": "img",
+                        "label": "三叉戟"
+                    }
+                ],
+                "desc": [
+                    "三叉，或作叉、三叉枪、三叉戟，是一种有三个叉的枪，外型与叉相同。用来叉鱼，以前也被作军事用途。三叉在神话、古代文化与现代文化中都有出现。"
+                ],
+                "title": "关于三叉戟"
+            }
+        ]
+    },
+    "parameter_desc": {
+        "data": [
+            {
+                "desc": [
+                    "好的任务名方便历史参数检索"
+                ],
+                "name": "任务名"
+            },
+            {
+                "anno": [
+                    "1. 注释xxx",
+                    "2.注释xxx"
+                ],
+                "desc": [
+                    "1.描述xxx",
+                    "2.描述xxx"
+                ],
+                "file": "abc.csv",
+                "name": "输入文件"
+            }
+        ]
+    },
+    "possible_errors": {
+        "predefine_view": [
+            "1.xxx",
+            "2.xxx"
+        ]
+    }
+}

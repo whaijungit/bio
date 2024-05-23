@@ -46,6 +46,8 @@ declare interface Tool {
     /** ((0, '不通过'), (1, '通过'), (2, '待审核'), (3, '开发中')) */
     status: number
     enable: boolean
+    name_en: string
+    name_zh: string
     /** 创建者姓名 */
     creator_name: string
 }
