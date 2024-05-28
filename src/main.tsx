@@ -9,7 +9,7 @@ http.post('/oauth/login/', {
     password: 'adm@HZ123456'
 }).then(r => {
     localStorage.setItem('token', r.data.token)
-    http.get('/system/tool/').then(r => {
+    http.get('/system/tool/').then(() => {
         console.log(1)
     })
 }).finally(() => {
