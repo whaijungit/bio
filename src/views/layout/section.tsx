@@ -2,6 +2,7 @@ import { Menu, MenuProps } from 'antd'
 import { Outlet } from 'react-router-dom'
 import { menuSlice, useMenu } from '@/store/menuSlice'
 import { useRouteState } from '@/compisition/userRouteState'
+import Footer from '@/components/footer'
 
 const Section: React.FC = () => {
     const { routeState } = useRouteState()
@@ -26,12 +27,14 @@ const Section: React.FC = () => {
                     </div>
                 </aside>
                 <main className='main'><Outlet /></main>
+                
             </section>
         )
     }
     return (
         <main className='section'>
             <Outlet />
+            <Footer/>
         </main>
     )
 

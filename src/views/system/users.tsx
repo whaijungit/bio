@@ -122,7 +122,11 @@ const Users: React.FC = () => {
             setLoading(true)
             try {
                 await awit()
-                const r = await getSystemUserList()
+                const r = await getSystemUserList({
+                    page,
+                    search,
+                    size: pageSize,
+                })
                 setTotal(r.data.count)
                 setDatas(r.data.results)
             } catch (error) { } finally {

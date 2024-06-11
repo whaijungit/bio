@@ -22,16 +22,19 @@ const Tools: React.FC = () => {
 
         {
             title: '名称',
+            ellipsis: true,
             dataIndex: 'name_zh',
         },
         {
             title: '英文名',
+            ellipsis: true,
             dataIndex: 'name_en',
         },
         {
             title: '类型',
         },
         {
+            width: 400,
             title: '创建者',
             ellipsis: true,
             dataIndex: 'creator',
@@ -40,8 +43,11 @@ const Tools: React.FC = () => {
                     <Select
                         virtual
                         allowClear
+                        size='middle'
                         mode='multiple'
                         maxTagCount={3}
+                        placeholder='请选择创建者'
+                        style={{width: 300}}
                         defaultValue={item.creator}
                         onChange={e => handleChangeRole(item, e)}
                         options={users.map(it => ({ ...it, value: it.id, label: it.realname }))}
@@ -69,12 +75,7 @@ const Tools: React.FC = () => {
                     <Dropdown menu={{ style: { backgroundColor: 'var(--light)' }, items: [{ key: 'success', label: '成功' }, { key: 'failed', label: '失败' }] }}>
                         <span className='audit audit-success'>成功</span>
                     </Dropdown>
-                    // <Switch
-                    //     checkedChildren='启用'
-                    //     unCheckedChildren='禁用'
-                    //     // defaultChecked={item.is_active}
-                    //     onChange={e => handleChangeActive(item, e)}
-                    // />
+                    
                 )
             }
         },
@@ -246,9 +247,7 @@ const Tools: React.FC = () => {
                 action={action}
                 open={openDrawerForm}
                 onClose={handleCloseDrawer}
-                // initialValues={selectedTool}
                 submitLoading={submitLoading}
-            // onConfirm={handleConfirmDrawerForm}
             />
             <Flex style={{ marginBottom: 20 }} justify='space-between'>
                 <Space>

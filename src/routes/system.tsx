@@ -1,8 +1,8 @@
+import { RouterItems } from '.'
 import Layout from '@/views/layout'
 import { Suspense, lazy } from 'react'
 import { done, start } from 'nprogress'
 import { Link, path_link } from '@/config'
-import { RouteObject } from 'react-router-dom'
 
 const Users = lazy(async () => {
     start()
@@ -76,16 +76,19 @@ export const Projects = lazy(async () => {
 })
 
 
-export const system_routes: RouteObject[] = [
+export const system_routes: RouterItems[] = [
     {
         element: <Layout />,
         path: '/' + Link.system,
+        meta: {
+            auth: true
+        },
         children: [
             {
                 index: true,
                 element: (
                     <Suspense>
-                        <Dashbord/>
+                        <Dashbord />
                     </Suspense>
                 )
             },

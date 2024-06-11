@@ -25,7 +25,6 @@ const TaskDataProjects = lazy(async () => {
     return com;
 })
 
-
 const TaskDataTools = lazy(async () => {
     start()
     const com = await import('@/views/task/data_tools')

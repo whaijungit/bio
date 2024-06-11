@@ -1,8 +1,8 @@
 import { Link } from '@/config'
+import { RouterItems } from '.'
 import Layout from '@/views/layout'
 import { Suspense, lazy } from 'react'
 import { start, done } from 'nprogress'
-import { RouteObject } from 'react-router-dom'
 
 const Home = lazy(async () => {
     start()
@@ -39,11 +39,7 @@ export const GroupDetail = lazy(async () => {
     return com
 })
 
-export const cloud_routes: (RouteObject & {
-    meta?: {
-        auth: boolean
-    }
-})[] = [
+export const cloud_routes: RouterItems[] = [
         {
             path: '/',
             meta: {
